@@ -9,6 +9,7 @@
 <body>
     <div class="container">
     <aside class="leftSideBar">
+        
 <nav>
     <ul>
         <li>
@@ -34,5 +35,22 @@
     </aside>
     </div>
     <script src="posts.js"></script>
+    <script>
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+
+if(!user){
+window.location.href = "login.html";
+}
+
+document.getElementById("welcome").innerText =
+"Hello " + user.username;
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location.href = "login.html";
+}
+
+</script>
 </body>
 </html>

@@ -1,0 +1,123 @@
+/* Page background */
+
+body{
+font-family: Arial, sans-serif;
+background:#f4f6f8;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+height:100vh;
+margin:0;
+}
+
+/* Form container */
+
+.container{
+
+background:white;
+padding:40px;
+
+border-radius:10px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+width:300px;
+
+text-align:center;
+
+}
+
+/* Title */
+
+h2{
+margin-bottom:20px;
+}
+
+/* Inputs */
+
+input{
+
+width:100%;
+
+padding:10px;
+
+margin-bottom:15px;
+
+border:1px solid #ccc;
+
+border-radius:5px;
+
+font-size:14px;
+
+}
+
+/* Button */
+
+button{
+
+width:100%;
+
+padding:10px;
+
+border:none;
+
+background:#4CAF50;
+
+color:white;
+
+font-size:16px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#45a049;
+
+}
+
+/* Links */
+
+a{
+
+color:#4CAF50;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+a:hover{
+
+text-decoration:underline;
+
+}
+
+/*logo*/
+.logo{
+font-size:28px;
+font-weight:bold;
+margin-bottom:10px;
+color:#4CAF50;
+}
+
+input:focus{
+
+outline:none;
+border:1px solid #4CAF50;
+
+box-shadow:0 0 5px rgba(76,175,80,0.5);
+
+}
+
+.error{
+color:red;
+margin-top:10px;
+font-size:14px;
+}
