@@ -1,5 +1,5 @@
-const feed = document.getElementById("posts")
-const posts =[]
+const feed = document.getElementById("posts");
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
 function displayPosts(){
     feed.innerHTML="";
     posts.forEach(posts => {
@@ -8,61 +8,29 @@ function displayPosts(){
         postFigure.innerHTML = `
         <h2>${posts.username}</h2>
         <p>${posts.content}</p>
-        <p class="timeStap">${posts.timestamp}</p>
+        <p class="timeStamp">${posts.timestamp}</p>
         `;
-feed.appendChild(postFigure)
+feed.appendChild(postFigure);
     })
 }
 const pstButton = document.getElementById("pstButton");
-pstButton.addEventListener("click",createPost)
+pstButton.addEventListener("click",createPost);
 function createPost(){
-    const time = new Date().toLocaleDateString();
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const time = new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString();
     const pstInput = document.getElementById("postText");
     const content = pstInput.value.trim();
     if (content === ""){
         return;
     }
+    const username = currentUser ? currentUser.username : "Guest";
 posts.push({
-    username: String(profile.username),
+    username: username,
     content: content,
     timestamp: time
-})
+});
+localStorage.setItem("posts",JSON.stringify(posts));
 pstInput.value="";
 displayPosts();
 }
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "ujrnewbiouvbgnewiuabnj rvieaur nvbigqwsvd bqerbvqierenu vbuqrejen gviquwwb vireqjbnguiqeron eruger nerjgerjnviuerjubnerjnviurfejnvbqeriunv iqe qier nbqi  eunvqfvneqrir vqeirj nnqeroiu b qef qeibjnv qei neqroiu n   qeiuV ER ERO IQNE  UERQ QOEUI VBNQ ",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
-posts.push({
-    username: "ahmed",
-    content: "giggity",
-    timestamp: "Now"
-});
 displayPosts();
