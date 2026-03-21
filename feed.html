@@ -9,7 +9,6 @@
 <body>
     <div class="container">
     <aside class="leftSideBar">
-        
 <nav>
     <ul>
         <li>
@@ -19,13 +18,7 @@
             <a href="">News</a>
         </li>
         <li>
-            <a href="">Post</a>
-        </li>
-        <li>
             <a href="">login</a>
-        </li>
-        <li>
-             <a href="logout()">logout</a>
         </li>
     </ul>
 </nav>
@@ -34,7 +27,16 @@
         <section id="posts"></section>
     </main>
     <aside class="rightSideBar">
-
+        <form>
+            <label>
+                Create a post
+            </label><br>
+            <label for="postText">
+                Text
+            </label><br>
+            <input id="postText" type="text" >
+            <input type="submit">
+        </form>
     </aside>
     </div>
     <script src="posts.js"></script>
