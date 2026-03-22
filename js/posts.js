@@ -2,11 +2,22 @@ const feed = document.getElementById("posts");
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
 function displayPosts(){
     feed.innerHTML="";
-    posts.forEach(post => {
+     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+     const users = JSON.parse(localStorage.getItem("users")) || [];
+     const filteredPosts = posts.filter(post => {
+        const postUser = users.find(u => u.username === post.username);
+        return postUser && currentUser.following.includes(postUser.id);
+    });
+    // if there are not any posts.
+    if(filteredPosts.length === 0){
+        feed.innerHTML = "<p>No posts to display. Follow users to see their posts!</p>";
+        return;
+    }
+    filteredPosts.forEach(post => {
         const postFigure = document.createElement("Figure");
         postFigure.classList.add("Post-box");
         postFigure.innerHTML = `
-        <h2>${post.username}</h2>
+        <h2 onclick="viewProfile('${post.username}')" style="cursor:pointer;">${post.username}</h2>
         <p>${post.content}</p>
         <p class="timeStamp">${post.timestamp}</p>
         <button onclick="deletePosts(${post.id})">Delete</button>
@@ -53,4 +64,15 @@ function deletePosts(postId){
     localStorage.setItem("posts",JSON.stringify(posts));
     displayPosts();
 }
+function viewProfile(username){
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.username === username);
+    if(user){
+        localStorage.setItem("viewedUser", JSON.stringify(user));
+        window.location.href = "profile.html";
+    } else {
+        console.log("User not found");
+    }
+}
+
 displayPosts();
