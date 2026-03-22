@@ -1,12 +1,12 @@
 const feed = document.getElementById("posts");
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
 function displayPosts(){
-    feed.innerHTML="";
-     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-     const users = JSON.parse(localStorage.getItem("users")) || [];
-     const filteredPosts = posts.filter(post => {
+    feed.innerHTML = "";
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const filteredPosts = posts.filter(post => {
         const postUser = users.find(u => u.username === post.username);
-        return postUser && currentUser.following.includes(postUser.id);
+        return postUser && (currentUser.following.includes(postUser.id) || post.username === currentUser.username);
     });
     // if there are not any posts.
     if(filteredPosts.length === 0){
@@ -16,11 +16,14 @@ function displayPosts(){
     filteredPosts.forEach(post => {
         const postFigure = document.createElement("Figure");
         postFigure.classList.add("Post-box");
+        const isLiked = post.likes.includes(currentUser.id);
         postFigure.innerHTML = `
-        <h2 onclick="viewProfile('${post.username}')" style="cursor:pointer;">${post.username}</h2>
-        <p>${post.content}</p>
-        <p class="timeStamp">${post.timestamp}</p>
-        <button onclick="deletePosts(${post.id})">Delete</button>
+            <h2 onclick="viewProfile('${post.username}')" style="cursor:pointer;">${post.username}</h2>
+            <p>${post.content}</p>
+            <p class="timeStamp">${post.timestamp}</p>
+            <button onclick="toggleLike(${post.id})" class="like-btn">${isLiked ? 'Unlike' : 'Like'} (${post.likes.length})</button>
+            <button onclick="viewPostDetails(${post.id})" class="view-btn">View Details (${post.comments.length} comments)</button>
+            <button onclick="deletePosts(${post.id})">Delete</button>
         `;
 feed.appendChild(postFigure);
     })
@@ -40,7 +43,10 @@ posts.unshift({
     username: username,
     content: content,
     timestamp: time,
-    id:Date.now()
+    id:Date.now(),
+    likes: [],
+    comments: []
+
 });
 localStorage.setItem("posts",JSON.stringify(posts));
 pstInput.value="";
@@ -73,6 +79,50 @@ function viewProfile(username){
     } else {
         console.log("User not found");
     }
+}
+
+function goToMyProfile(){
+    localStorage.removeItem("viewedUser");
+    window.location.href = "profile.html";
+}
+
+function toggleLike(postId){
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) return;  // Ensure user is logged in
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    const index = post.likes.indexOf(currentUser.id);
+    if (index > -1) {
+        post.likes.splice(index, 1);  // Unlike
+    } else {
+        post.likes.push(currentUser.id);  // Like
+    }
+    localStorage.setItem("posts", JSON.stringify(posts));
+    displayPosts();
+}
+
+function addComment(postId){
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) return;  // Ensure user is logged in
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    const commentInput = document.querySelector(`.comment-input[data-post-id="${postId}"]`);
+    const content = commentInput.value.trim();
+    if (content === "") return;
+    const time = new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString();
+    post.comments.push({
+        username: currentUser.username,
+        content: content,
+        timestamp: time
+    });
+    localStorage.setItem("posts", JSON.stringify(posts));
+    commentInput.value = "";
+    displayPosts();
+}
+
+function viewPostDetails(postId){
+    localStorage.setItem("viewedPostId", postId);
+    window.location.href = "post.html";
 }
 
 displayPosts();

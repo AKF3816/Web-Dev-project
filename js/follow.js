@@ -18,6 +18,10 @@ userPosts.forEach(post => {
     <p>${post.timestamp}</p>`;
     container.appendChild(postDiv);
 });
+
+function goToMyProfile(){
+    localStorage.removeItem("viewedUser");
+}
 // users list
 const users = JSON.parse(localStorage.getItem("users")) || [];
 const followBtn = document.getElementById("followBtn");
@@ -43,4 +47,14 @@ if (currentUser.id === viewedUser.id) {
         localStorage.setItem("users", JSON.stringify(updatedUsers));
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
     });
+}
+
+function viewFollowers(){
+    localStorage.setItem("viewedUser", JSON.stringify(viewedUser));
+    window.location.href = "followers.html";
+}
+
+function viewFollowing(){
+    localStorage.setItem("viewedUser", JSON.stringify(viewedUser));
+    window.location.href = "following.html";
 }

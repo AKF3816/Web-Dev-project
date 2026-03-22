@@ -121,3 +121,98 @@ color:red;
 margin-top:10px;
 font-size:14px;
 }
+
+/* Like button */
+.like-btn {
+    background: #ddd;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.like-btn:hover {
+    background: #ccc;
+}
+
+/* Comments section */
+.comments-section {
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.comment-input {
+    width: 60%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.comment-btn {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.comment-btn:hover {
+    background: #e0e0e0;
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comments-list p {
+    background: #f9f9f9;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.comments-list strong {
+    font-weight: bold;
+}
+
+.comments-list small {
+    font-size: 12px;
+    color: #666;
+}
+
+/* View details button */
+.view-btn {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.view-btn:hover {
+    background: #138496;
+}
+
+/* User list */
+#userList {
+    list-style: none;
+    padding: 0;
+}
+
+#userList li {
+    margin-bottom: 10px;
+}
+
+#userList a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#userList a:hover {
+    text-decoration: underline;
+}
