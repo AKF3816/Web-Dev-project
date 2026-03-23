@@ -1,216 +1,230 @@
-/* Page background */
-
-body{
-font-family: Arial, sans-serif;
-background:#f4f6f8;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-height:100vh;
-margin:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Supreme-regular", sans-serif;
 }
 
-/* Form container */
-
-.container{
-
-background:white;
-padding:40px;
-
-border-radius:10px;
-
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-
-width:300px;
-
-text-align:center;
-
+:root {
+    --accent: #3a9fdf;
+    --accent-hover: #2b8ec8;
+    --bg: #f7f7f7;
+    --sidebar-bg: #ffffff;
+    --border: #e4e4e4;
+    --text: #0b283d;
+    --text-light: #6b8a9a;
 }
 
-/* Title */
-
-h2{
-margin-bottom:20px;
+@font-face {
+    font-family: "Chubbo-bold";
+    src: url(../fonts/Chubbo-Bold.otf) format("opentype");
 }
 
-/* Inputs */
-
-input{
-
-width:100%;
-
-padding:10px;
-
-margin-bottom:15px;
-
-border:1px solid #ccc;
-
-border-radius:5px;
-
-font-size:14px;
-
+@font-face {
+    font-family: "Supreme-regular";
+    src: url(../fonts/Supreme-Regular.otf) format("opentype");
 }
 
-/* Button */
-
-button{
-
-width:100%;
-
-padding:10px;
-
-border:none;
-
-background:#4CAF50;
-
-color:white;
-
-font-size:16px;
-
-border-radius:5px;
-
-cursor:pointer;
-
+@font-face {
+    font-family: "Supreme-bold";
+    src: url(../fonts/Supreme-Bold.otf) format("opentype");
 }
 
-button:hover{
-
-background:#45a049;
-
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Links */
-
-a{
-
-color:#4CAF50;
-
-text-decoration:none;
-
-font-weight:bold;
-
+.container {
+    background-color: var(--sidebar-bg);
+    padding: 2.5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--border);
+    width: 320px;
+    text-align: center;
 }
 
-a:hover{
-
-text-decoration:underline;
-
+.logo {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
 }
 
-/*logo*/
-.logo{
-font-size:28px;
-font-weight:bold;
-margin-bottom:10px;
-color:#4CAF50;
+h2 {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1.5rem;
 }
 
-input:focus{
-
-outline:none;
-border:1px solid #4CAF50;
-
-box-shadow:0 0 5px rgba(76,175,80,0.5);
-
+input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 1.6rem;
+    font-size: 0.875rem;
+    outline: none;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
-.error{
-color:red;
-margin-top:10px;
-font-size:14px;
+input:focus {
+    border-color: var(--accent);
 }
 
-/* Like button */
-.like-btn {
-    background: #ddd;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 1.6rem;
+    background-color: var(--accent);
+    color: var(--sidebar-bg);
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 14px;
-    margin-right: 10px;
+    margin-top: 0.25rem;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.75rem;
+}
+
+.like-btn {
+    padding: 0.4rem 1rem;
+    border-radius: 1.6rem;
+    border: 1px solid var(--accent);
+    background-color: transparent;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .like-btn:hover {
-    background: #ccc;
+    background-color: #e8f4fc;
 }
 
-/* Comments section */
-.comments-section {
-    margin-top: 10px;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-}
-
-.comment-input {
-    width: 60%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
-.comment-btn {
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-.comment-btn:hover {
-    background: #e0e0e0;
-}
-
-.comments-list {
-    margin-top: 10px;
-}
-
-.comments-list p {
-    background: #f9f9f9;
-    padding: 5px;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.comments-list strong {
-    font-weight: bold;
-}
-
-.comments-list small {
-    font-size: 12px;
-    color: #666;
-}
-
-/* View details button */
 .view-btn {
-    background: #17a2b8;
-    color: white;
-    border: none;
-    padding: 5px 10px;
+    padding: 0.4rem 1rem;
+    border-radius: 1.6rem;
+    border: 1px solid var(--text);
+    background-color: transparent;
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
 }
 
 .view-btn:hover {
-    background: #138496;
+    background-color: var(--bg);
 }
 
-/* User list */
+.comments-section {
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 1.6rem;
+    font-size: 0.8rem;
+    outline: none;
+    background-color: var(--bg);
+    margin-bottom: 0.5rem;
+}
+
+.comment-input:focus {
+    border-color: var(--accent);
+}
+
+.comment-btn {
+    padding: 0.4rem 1rem;
+    border-radius: 1.6rem;
+    border: 1px solid var(--border);
+    background-color: transparent;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.comment-btn:hover {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.comments-list {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.comments-list p {
+    background-color: var(--bg);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text);
+    text-align: left;
+}
+
+.comments-list strong {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.comments-list small {
+    font-size: 0.7rem;
+    color: var(--text-light);
+}
+
 #userList {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 #userList li {
-    margin-bottom: 10px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background-color: var(--sidebar-bg);
 }
 
 #userList a {
-    color: #007bff;
+    color: var(--accent);
     text-decoration: none;
+    font-weight: 500;
 }
 
 #userList a:hover {

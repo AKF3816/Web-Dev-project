@@ -4,18 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="css/profileStyle.css">
+    <link rel="stylesheet" href="css/profileStyles.css">
+    
 </head>
 <body>
-    
-    <h2 id="username"></h2>
-    <p id="email"></p>
-    <button id="followBtn">Follow</button>
-    <a href="#" onclick="viewFollowers()">Followers</a> | <a href="#" onclick="viewFollowing()">Following</a>
-    <section id="userPosts"></section>
-    
+  <h1>SocialConnect</h1>
+    <div class="container">
 
+        <header class="header">
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="#" onclick="goToMyProfile()">
+                            <img class="icon" src="svg\user-profile-person-svgrepo-com.svg">
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="feed.html">
+                            <img class="icon" src="svg/newsFeed.svg">
+                            <span>News</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <img class="icon" src="svg/login.svg">
+                            <span>Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
+        <main class="center">
+            <div class="profile">
+
+                <section class="profile-header">
+                    <div class="profile-cover"></div>
+                    <div class="profile-info">
+                        <div>
+                            <div class="profile-avatar" id="avatarInitial"></div>
+                            <h2 id="username"></h2>
+                            <p id="email"></p>
+                            <p id="bio"></p>
+                        </div>
+                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                            <button id="followBtn">Follow</button>
+                            <button id="editBtn">Edit Profile</button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="links">
+                    <a href="#" onclick="viewFollowers()">
+                        <span id="followersCount">0</span>
+                        Followers
+                    </a>
+                    <a href="#" onclick="viewFollowing()">
+                        <span id="followingCount">0</span>
+                        Following
+                    </a>
+                </div>
+
+                <section id="userPosts" class="posts"></section>
+
+            </div>
+        </main>
+    </div>
+  <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+          <h2>Edit Profile</h2>
+          <label>Email</label>
+          <input type="email" id="editEmail" placeholder="Email">
+          <label>Bio</label>
+          <input type="text" id="editBio" placeholder="Write something about yourself...">
+          <div class="modal-btns">
+              <button id="saveBtn">Save</button>
+              <button id="cancelBtn">Cancel</button>
+          </div>
+      </div>
+  </div>
     <script src="js/follow.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>

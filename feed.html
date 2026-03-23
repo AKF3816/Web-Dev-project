@@ -8,36 +8,67 @@
 </head>
 <body>
     <div class="container">
-    <aside class="leftSideBar">
-<nav>
-    <ul>
-        <li>
-            <a href="profile.html"><img class="icon" src="svg/user-profile-person-svgrepo-com.svg">Profile</a>
-        </li>
-        <li>
-            <a href="feed.html"><img class="icon" src="svg/newsFeed.svg">News</a>
-        </li>
-        <li>
-            <a href="login.html"><img class="icon" src="svg/login.svg">login</a>
-        </li>
-    </ul>
-</nav>
-    </aside>
-    <main class="center">
-        <section id="posts"></section>
-    </main>
-    <aside class="rightSideBar">
-        <form>
-            <label>
-                Create a post
-            </label><br>
-            <label for="postText">
-                Text
-            </label><br>
-            <input id="postText" placeholder="What's on your mind?" type="text" >
-            <button type="button" id="pstButton">submit</button>
-        </form>
-    </aside>
+        
+        <aside class="sidebar">
+            <h1>SocialConnect</h1>
+            <ul>
+                <li>
+                    <a href="#" onclick="goToMyProfile()">
+                        <img class="icon" src="svg/user-profile-person-svgrepo-com.svg">
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="feed.html">
+                        <img class="icon" src="svg/newsFeed.svg">
+                        News
+                    </a>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <img class="icon" src="svg/login.svg">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <header class="header">
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="#" onclick="goToMyProfile()">
+                            <img class="icon" src="svg/user-profile-person-svgrepo-com.svg">
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="feed.html">
+                            <img class="icon" src="svg/newsFeed.svg">
+                            <span>News</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <img class="icon" src="svg/login.svg">
+                            <span>Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="postbar">
+            <form>
+                <input id="postText" placeholder="What's on your mind?" type="text">
+                <button type="button" id="pstButton">Post</button>
+            </form>
+        </div>
+
+        <main class="center">
+            <section id="posts"></section>
+        </main>
+
     </div>
     <script src="js/posts.js"></script>
 </body>

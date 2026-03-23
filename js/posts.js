@@ -8,13 +8,13 @@ function displayPosts(){
         const postUser = users.find(u => u.username === post.username);
         return postUser && (currentUser.following.includes(postUser.id) || post.username === currentUser.username);
     });
-    // if there are not any posts.
+    // If there are not any posts.
     if(filteredPosts.length === 0){
         feed.innerHTML = "<p>No posts to display. Follow users to see their posts!</p>";
         return;
     }
     filteredPosts.forEach(post => {
-        const postFigure = document.createElement("Figure");
+        const postFigure = document.createElement("figure");
         postFigure.classList.add("Post-box");
         const isLiked = post.likes.includes(currentUser.id);
         postFigure.innerHTML = `
@@ -23,7 +23,9 @@ function displayPosts(){
             <p class="timeStamp">${post.timestamp}</p>
             <button onclick="toggleLike(${post.id})" class="like-btn">${isLiked ? 'Unlike' : 'Like'} (${post.likes.length})</button>
             <button onclick="viewPostDetails(${post.id})" class="view-btn">View Details (${post.comments.length} comments)</button>
-            <button onclick="deletePosts(${post.id})">Delete</button>
+            ${post.username === currentUser.username ? 
+            `<button onclick="deletePosts(${post.id})" class="delete-btn">Delete</button>` 
+    : ""}
         `;
 feed.appendChild(postFigure);
     })
@@ -88,14 +90,14 @@ function goToMyProfile(){
 
 function toggleLike(postId){
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser) return;  // Ensure user is logged in
+    if (!currentUser) return;  
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     const index = post.likes.indexOf(currentUser.id);
     if (index > -1) {
-        post.likes.splice(index, 1);  // Unlike
+        post.likes.splice(index, 1); 
     } else {
-        post.likes.push(currentUser.id);  // Like
+        post.likes.push(currentUser.id);  
     }
     localStorage.setItem("posts", JSON.stringify(posts));
     displayPosts();
@@ -103,7 +105,7 @@ function toggleLike(postId){
 
 function addComment(postId){
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser) return;  // Ensure user is logged in
+    if (!currentUser) return;  
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     const commentInput = document.querySelector(`.comment-input[data-post-id="${postId}"]`);

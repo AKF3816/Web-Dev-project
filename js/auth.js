@@ -8,12 +8,10 @@ if(registerForm){
 registerForm.addEventListener("submit", function(e){
 
 e.preventDefault();
-
 const username = document.getElementById("username").value.trim();
 const email = document.getElementById("email").value.trim();
 const password = document.getElementById("password").value.trim();
 const message = document.getElementById("registerMessage");
-
 message.innerText = "";
 
 if(!email.includes("@")){
@@ -98,11 +96,9 @@ u => u.email === email && u.password === password
 );
 
 if(user){
-
-localStorage.setItem("currentUser", JSON.stringify(user));
-
-window.location.href = "feed.html";
-
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.removeItem("viewedUser");
+    window.location.href = "feed.html";
 }else{
 
 document.getElementById("loginMessage").innerText =
