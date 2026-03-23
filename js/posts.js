@@ -128,3 +128,70 @@ function viewPostDetails(postId){
 }
 
 displayPosts();
+
+
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (query === "") {
+        searchResults.classList.remove("open");
+        searchResults.innerHTML = "";
+        return;
+    }
+
+    const matched = users.filter(u =>
+        u.username.toLowerCase().includes(query) && u.id !== currentUser.id
+    );
+
+    if (matched.length === 0) {
+        searchResults.innerHTML = `<p style="padding:0.5rem;font-size:0.8rem;color:var(--text-light)">No users found</p>`;
+        searchResults.classList.add("open");
+        return;
+    }
+
+    searchResults.innerHTML = "";
+    matched.forEach(user => {
+        const isFollowing = currentUser.following.includes(user.id);
+        const item = document.createElement("div");
+        item.classList.add("search-result-item");
+        item.innerHTML = `
+            <span onclick="viewProfile('${user.username}')">${user.username}</span>
+            <button class="${isFollowing ? 'following' : ''}" onclick="searchFollow(${user.id}, this)">
+                ${isFollowing ? 'Following' : 'Follow'}
+            </button>
+        `;
+        searchResults.appendChild(item);
+    });
+    searchResults.classList.add("open");
+});
+
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-bar")) {
+        searchResults.classList.remove("open");
+    }
+});
+
+function searchFollow(userId, btn) {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (currentUser.following.includes(userId)) {
+        currentUser.following = currentUser.following.filter(id => id !== userId);
+        btn.textContent = "Follow";
+        btn.classList.remove("following");
+    } else {
+        currentUser.following.push(userId);
+        btn.textContent = "Following";
+        btn.classList.add("following");
+    }
+
+    const updatedUsers = users.map(u => u.id === currentUser.id ? currentUser : u);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    displayPosts();
+}
