@@ -404,6 +404,10 @@ button:hover {
         height: 100vh;
     }
 
+    .navbar {
+        display: none;
+    }
+    
     .sidebar h1 {
         font-family: "Chubbo-bold", sans-serif;
         font-size: 1.5rem;
