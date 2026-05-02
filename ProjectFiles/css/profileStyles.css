@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Supreme-regular", sans-serif;
+}
+
+:root {
+    --accent: #3a9fdf;
+    --accent-hover: #2b8ec8;
+    --bg: #f7f7f7;
+    --sidebar-bg: #ffffff;
+    --border: #e4e4e4;
+    --text: #0b283d;
+    --text-light: #6b8a9a;
+}
+
+@font-face {
+    font-family: "Chubbo-bold";
+    src: url(../fonts/Chubbo-Bold.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "Supreme-regular";
+    src: url(../fonts/Supreme-Regular.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "Supreme-bold";
+    src: url(../fonts/Supreme-Bold.otf) format("opentype");
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-top: 0.5rem;
+}
+body h1 {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-light);
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header"
+        "center";
+    min-height: 100vh;
+}
+
+.header {
+    grid-area: header;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    height: 72px;
+    border-radius: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+}
+
+.navbar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 1.6rem;
+    border: 1px solid var(--border);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-light);
+    background-color: var(--bg);
+}
+
+.navbar ul li a:hover {
+    background-color: #e8f4fc;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.navbar ul li a.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--sidebar-bg);
+}
+
+.navbar ul li a span {
+    display: none;
+}
+
+.icon {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.center {
+    grid-area: center;
+    background-color: var(--bg);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.profile {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-header {
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    overflow: hidden;
+}
+
+.profile-cover {
+    width: 100%;
+    height: 100px;
+    background-color: var(--accent);
+}
+
+.profile-info {
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--accent-hover);
+    border: 3px solid var(--sidebar-bg);
+    margin-top: -2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.5rem;
+    color: var(--sidebar-bg);
+}
+
+.profile-info h2 {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 0.25rem;
+}
+
+.profile-info p {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 1.6rem;
+    background-color: var(--accent);
+    color: var(--sidebar-bg);
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+.links {
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-radius: 1.6rem;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 0.5rem 1.25rem;
+    border-radius: 1.6rem;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.links a span {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.links a:hover {
+    background-color: #e8f4fc;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.links a:hover span {
+    color: var(--accent);
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.posts figure {
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-radius: 1.2rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.posts figure h2 {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.posts figure p {
+    font-size: 0.875rem;
+    color: var(--text);
+}
+
+.posts figure .timeStamp {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background-color: var(--sidebar-bg);
+    border-radius: 2rem;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal h2 {
+    font-family: "Chubbo-bold", sans-serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+}
+
+.modal label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.modal-btns {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.modal-btns button {
+    flex: 1;
+    align-self: auto;
+}
+
+#cancelBtn {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-light);
+}
+
+#cancelBtn:hover {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.profile-info p#bio {
+    font-size: 0.875rem;
+    color: var(--text);
+    margin-top: 0.25rem;
+}
+
+
+
+@media (min-width: 600px) {
+    .navbar ul li a span {
+        display: inline;
+    }
+
+    .profile-info {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .profile-info button {
+        align-self: auto;
+        margin-bottom: 0.25rem;
+    }
+}
