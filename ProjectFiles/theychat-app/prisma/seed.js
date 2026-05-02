@@ -1,9 +1,8 @@
-import { PrismaClient } from "./client/index.js"
+import prisma from "../repos/prisma.js";
 import { PrismaLibSql } from "@prisma/adapter-libsql"
 
-const url = `file:///${process.cwd().replace(/\\/g, '/')}/prisma/data/dev.db`
-const adapter = new PrismaLibSql({ url })
-const prisma = new PrismaClient({ adapter })
+
+
 
 async function main() {
 
