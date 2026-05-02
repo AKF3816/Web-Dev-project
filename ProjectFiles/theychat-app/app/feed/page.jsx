@@ -10,6 +10,9 @@ import Link from "next/link";
 export default function FeedPage() {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const router = useRouter();
 
 
@@ -21,7 +24,19 @@ export default function FeedPage() {
 
   useEffect(() => {
     fetchPosts();
+    fetch("/api/users").then(r => r.json()).then(setAllUsers);
   }, []);
+
+  function handleSearch(e) {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (query.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
+    const matched = allUsers.filter(u => u.username.toLowerCase().includes(query.toLowerCase()));
+    setSearchResults(matched);
+  }
 
 
 
@@ -112,8 +127,16 @@ export default function FeedPage() {
       <header className="header">
         
         <div className="search-bar">
-          <input type="text" placeholder="Search users..." />
-          <div className="search-results"></div>
+          <input type="text" placeholder="Search users..." onChange={handleSearch} />
+          {searchResults.length > 0 && (
+            <div className="search-results open">
+              {searchResults.map(u => (
+                <div key={u.id} className="search-result-item" onClick={() => router.push(`/profile?userID=${u.id}`)}>
+                  {u.username}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
@@ -136,7 +159,7 @@ export default function FeedPage() {
         ) : (
           posts.map((post) => (
             <figure key={post.id} className="Post-box">
-              <h2>{post.postAuthor?.username}</h2>
+              <h2 style={{cursor:"pointer"}} onClick={() => router.push(`/profile?userID=${post.postAuthor?.id}`)}>{post.postAuthor?.username}</h2>
               <p>{post.content}</p>
               <p className="timeStamp">{post.timeStamp}</p>
               <button className="like-btn" onClick={() => handleLike(post.id)}>

@@ -1,12 +1,12 @@
 "use client";
-import "../../../css/feedStyles.css"
-
+import "../../../css/styles.css"
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function FollowersPage() {
   const [followers, setFollowers] = useState([]);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const userID = searchParams.get("userID");
 
   useEffect(() => {
@@ -20,12 +20,19 @@ export default function FollowersPage() {
 
   return (
     <main>
-      <h2>Followers</h2>
-      <ul>
-        {followers.map((f) => (
-          <li key={f.follower.id}>{f.follower.username}</li>
-        ))}
-      </ul>
+      <div className="container">
+        <h2>Followers</h2>
+        <ul id="userList">
+          {followers.map((f) => (
+            <li key={f.follower.id}>
+              <a onClick={() => router.push(`/profile?userID=${f.follower.id}`)} style={{cursor:"pointer"}}>
+                {f.follower.username}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <button onClick={() => router.push(`/profile?userID=${userID}`)}>Back to Profile</button>
+      </div>
     </main>
   );
 }

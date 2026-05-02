@@ -36,11 +36,13 @@ export async function getById(id) {
       name: true,
       bio: true,
       profilePic: true,
-      posts: true,
-      comments: true,
-      likes: true,
-      following: true,
-      followers: true,
+      _count: {
+        select: {
+          posts: true,
+          followers: true,
+          following: true,
+        }
+      },
     },
   });
 }
