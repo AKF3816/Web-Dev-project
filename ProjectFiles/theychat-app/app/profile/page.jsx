@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import "../../../css/profileStyle.css"
+import "../../../css/profileStyles.css"
 export default function ProfilePage() {
 
 

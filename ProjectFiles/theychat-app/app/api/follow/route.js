@@ -41,3 +41,20 @@ export async function POST(request) {
     return Response.json({ error: "Server error." }, { status: 500 });
   }
 }
+
+
+export async function DELETE(request) {
+  try {
+    const body = await request.json();
+
+    if (!body.followerID || !body.followedID) {
+      return Response.json({ error: "followerID and followedID are required." }, { status: 400 });
+    }
+
+    await followRepo.deleteFollow(body.followerID, body.followedID);
+    return Response.json({ message: "Unfollowed successfully." });
+  } catch (e) {
+    console.error(e);
+    return Response.json({ error: "Server error." }, { status: 500 });
+  }
+}

@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import "../../../css/feedStyles.css"
 
 import { useState, useEffect } from "react";
@@ -35,10 +35,10 @@ export default function FeedPage() {
                         </Link>
                     </li>
                     <li>
-                        <a href="/login">
+                        <Link href="/login">
                             <img className="icon" src="/svg/login.svg"/>
                             <span>Logout</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </nav>
