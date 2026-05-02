@@ -4,6 +4,11 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const UserID = searchParams.get("UserID");
+    const postID = searchParams.get("postID");
+
+    if (postID) {
+      return Response.json(await comments.getByPost(postID));
+    }
 
     if (UserID) {
       return Response.json(await comments.getByUser(UserID));

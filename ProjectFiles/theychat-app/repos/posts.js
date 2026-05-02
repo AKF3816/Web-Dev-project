@@ -77,7 +77,7 @@ export async function create(data) {
 }
 
 export async function remove(id) {
-  return await prisma.post.delete({
-    where: { id },
-  });
+  await prisma.like.deleteMany({ where: { postID: id } });
+  await prisma.comment.deleteMany({ where: { postID: id } });
+  return await prisma.post.delete({ where: { id } });
 }

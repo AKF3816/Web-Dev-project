@@ -1,4 +1,4 @@
-import * as posts from "../../../repos/posts";
+import * as posts from "../../../../repos/posts";
 
 export async function GET(request, context) {
   try {

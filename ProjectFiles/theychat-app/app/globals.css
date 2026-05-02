@@ -1,2 +1,81 @@
 @import "tailwindcss";
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@media (min-width: 600px) {
+    .navbar ul li a span {
+        display: inline;
+    }
+}
+
+@media (min-width: 1000px) {
+    .container {
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "sidebar header"
+            "sidebar postbar"
+            "sidebar center";
+    }
+
+    .sidebar {
+        grid-area: sidebar;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border);
+        border-radius: 0 2rem 2rem 0;
+        padding: 1.5rem 1rem;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .sidebar h1 {
+        font-family: "Chubbo-bold", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .sidebar ul li a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 1.6rem;
+        border: 1px solid var(--border);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-light);
+        background-color: var(--bg);
+    }
+
+    .sidebar ul li a:hover {
+        background-color: #e8f4fc;
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .header h1 {
+        display: none;
+    }
+}

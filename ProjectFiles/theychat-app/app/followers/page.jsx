@@ -19,7 +19,7 @@ export default function FollowersPage() {
   }, [userID]);
 
   return (
-    <main className="container">
+    <main>
       <h2>Followers</h2>
       <ul>
         {followers.map((f) => (

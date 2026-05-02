@@ -22,7 +22,15 @@ export default function LoginPage() {
     );
 
     if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
+      localStorage.setItem("currentUser", JSON.stringify({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        bio: user.bio,
+        profilePic: user.profilePic,
+        _count: user._count
+      }));
       router.push("/feed");
     } else {
       setMessage("Invalid email or password");

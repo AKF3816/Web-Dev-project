@@ -38,6 +38,26 @@ export async function getById(commentID) {
   });
 }
 
+export async function getByPost(postID) {
+  return await prisma.comment.findMany({
+    where: { postID },
+    select: {
+      commentID: true,
+      content: true,
+      timeStamp: true,
+      user: {
+        select: {
+          id: true,
+          username: true,
+        },
+      },
+    },
+    orderBy: {
+      timeStamp: "desc",
+    },
+  });
+}
+
 export async function getByUser(UserID) {
   return await prisma.comment.findMany({
     where: { UserID },
@@ -52,6 +72,7 @@ export async function create(data) {
     data: {
       content: data.content,
       UserID: data.UserID,
+      postID: data.postID,
     },
   });
 }

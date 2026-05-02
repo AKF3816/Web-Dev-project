@@ -19,7 +19,7 @@ export default function FollowingPage() {
   }, [userID]);
 
   return (
-    <main className="container">
+    <main >
       <h2>Following</h2>
       <ul>
         {following.map((f) => (

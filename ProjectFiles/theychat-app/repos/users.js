@@ -8,6 +8,7 @@ export async function getAll() {
       email: true,
       name: true,
       bio: true,
+      password: true,
       profilePic: true,
       _count: {
         select: {
