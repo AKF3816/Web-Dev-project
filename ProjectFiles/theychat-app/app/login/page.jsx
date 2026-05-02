@@ -1,44 +1,68 @@
 "use client";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-export default function LoginPage(){
-const [message,setMessage] = useState("");
-function  Logger(e){
-e.preventDefault();
-const email = e.target.email.value.trim();
-const password = e.target.password.value.trim();
-const Users = JSON.parse(// api endpoint
-    )
-const user = Users.find( (i) => i.email === email && i.password === password);
-//if user true set current user to the user = to email
-//move to feed.chat
-//else {setmessage("invalid email or password")} 
-}
 
+export default function LoginPage() {
+  const [message, setMessage] = useState("");
+  const router = useRouter();
 
-return <main>
+  async function Logger(e) {
+    e.preventDefault();
 
-<section class="container">
-<h1 classname="logo">TheyChat</h1>
-<h2>Login</h2>
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
 
-<form id="loginForm" onSubmit={Logger}>
+    const response = await fetch("/api/users");
+    const users = await response.json();
 
-<input type="email" name="email" id="email" placeholder="Email" required />
+    const user = users.find(
+      (i) => i.email === email && i.password === password
+    );
 
-<input type="password" name="password" id="password" placeholder="Password" required />
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      router.push("/feed");
+    } else {
+      setMessage("Invalid email or password");
+    }
+  }
 
-<button type="submit">Login</button>
+  return (
+    <main>
+      <section className="container">
+        <h1 className="logo">TheyChat</h1>
+        <h2>Login</h2>
 
-</form>
+        <form id="loginForm" onSubmit={Logger}>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
 
-<p id="loginMessage" class="error"></p>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
 
-<p>No account yet?</p>
+          <button type="submit">Login</button>
+        </form>
 
-<a Link href="/register">Register</a>
+        <p id="loginMessage" className="error">
+          {message}
+        </p>
 
-</section>
+        <p>No account yet?</p>
 
-</main>;
+        <Link href="/register">Register</Link>
+      </section>
+    </main>
+  );
 }
