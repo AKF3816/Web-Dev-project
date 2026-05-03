@@ -4,12 +4,17 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import "../../../css/profileStyles.css"
 
+function formatDate(ts) {
+  return new Date(ts).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [isOwnProfile, setIsOwnProfile] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editBio, setEditBio] = useState("");
+  const [editName, setEditName] = useState("");
   const [isFollowing, setIsFollowing] = useState(false);
   const [currentUserID, setCurrentUserID] = useState(null);
   const router = useRouter();
@@ -22,6 +27,7 @@ export default function ProfilePage() {
     const data = await res.json();
     setUser(data);
     setEditBio(data.bio || "");
+    setEditName(data.name || "");
   }
 
   useEffect(() => {
@@ -44,6 +50,7 @@ export default function ProfilePage() {
       const data = await res.json();
       setUser(data);
       setEditBio(data.bio || "");
+      setEditName(data.name || "");
     }
 
     async function fetchPosts() {
@@ -86,7 +93,7 @@ export default function ProfilePage() {
               </li>
             </ul>
           </nav>
-          <Link href="/feed">Back to Feed</Link>
+          <Link href="/feed" className="back-link">Back to Feed</Link>
         </header>
 
         <main className="center">
@@ -97,9 +104,10 @@ export default function ProfilePage() {
               <div className="profile-info">
                 <div>
                   <div className="profile-avatar">{user.username?.[0]?.toUpperCase()}</div>
-                  <h2>{user.username}</h2>
+                  <h2>{user.name || user.username}</h2>
+                  <p>@{user.username}</p>
                   <p>{user.email}</p>
-                  <p>{user.bio}</p>
+                  {user.bio && <p id="bio">{user.bio}</p>}
                 </div>
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                   {isOwnProfile ? (
@@ -142,7 +150,7 @@ export default function ProfilePage() {
                 posts.map((post) => (
                   <figure key={post.id} className="Post-box">
                     <p>{post.content}</p>
-                    <p className="timeStamp">{post.timeStamp}</p>
+                    <p className="timeStamp">{formatDate(post.timeStamp)}</p>
                   </figure>
                 ))
               )}
@@ -153,21 +161,36 @@ export default function ProfilePage() {
       </div>
 
       {showEditModal && (
-        <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
+        <div className="modal-overlay open" onClick={() => setShowEditModal(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <h2>Edit Profile</h2>
-            <label>Bio</label>
+            <label>Name</label>
             <input
               type="text"
+              placeholder="Your display name"
+              value={editName}
+              onChange={e => setEditName(e.target.value)}
+            />
+            <label>Bio</label>
+            <textarea
+              rows={3}
               placeholder="Write something about yourself..."
               value={editBio}
               onChange={e => setEditBio(e.target.value)}
             />
             <div className="modal-btns">
-              <button onClick={() => {
+              <button onClick={async () => {
                 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-                localStorage.setItem("currentUser", JSON.stringify({ ...currentUser, bio: editBio }));
-                setUser(prev => ({ ...prev, bio: editBio }));
+                const res = await fetch(`/api/users?id=${currentUser.id}`, {
+                  method: "PATCH",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ name: editName, bio: editBio }),
+                });
+                if (res.ok) {
+                  const updated = await res.json();
+                  localStorage.setItem("currentUser", JSON.stringify({ ...currentUser, name: updated.name, bio: updated.bio }));
+                  setUser(prev => ({ ...prev, name: updated.name, bio: updated.bio }));
+                }
                 setShowEditModal(false);
               }}>Save</button>
               <button id="cancelBtn" onClick={() => setShowEditModal(false)}>Cancel</button>

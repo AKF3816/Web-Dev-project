@@ -28,6 +28,27 @@ export async function GET(request) {
   }
 }
 
+export async function PATCH(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return Response.json({ error: "User ID is required." }, { status: 400 });
+    }
+
+    const body = await request.json();
+    const updatedUser = await users.update(id, body);
+    return Response.json(updatedUser);
+  } catch (e) {
+    console.error(e);
+    if (e.code === "P2025") {
+      return Response.json({ error: "User not found." }, { status: 404 });
+    }
+    return Response.json({ error: "Server error." }, { status: 500 });
+  }
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();

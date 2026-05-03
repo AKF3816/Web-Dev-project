@@ -47,6 +47,31 @@ export async function getById(id) {
   });
 }
 
+export async function update(id, data) {
+  return await prisma.user.update({
+    where: { id },
+    data: {
+      name: data.name,
+      bio: data.bio,
+    },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      name: true,
+      bio: true,
+      profilePic: true,
+      _count: {
+        select: {
+          posts: true,
+          followers: true,
+          following: true,
+        },
+      },
+    },
+  });
+}
+
 export async function create(data) {
   return await prisma.user.create({
     data: {

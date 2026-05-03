@@ -57,6 +57,22 @@ a:hover {
     color: var(--accent);
 }
 
+.back-link {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-left: auto;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 1.6rem;
+    background-color: var(--bg);
+}
+
+.back-link:hover {
+    background-color: #e8f4fc;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr;
@@ -145,6 +161,7 @@ a:hover {
     border: 1px solid var(--border);
     border-radius: 2rem;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .profile-cover {
@@ -212,6 +229,7 @@ button:hover {
     padding: 0.75rem 1.5rem;
     display: flex;
     justify-content: space-around;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .links a {
@@ -258,6 +276,12 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.15s;
+}
+
+.posts figure:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
 .posts figure h2 {
@@ -313,6 +337,25 @@ button:hover {
     color: var(--text-light);
 }
 
+.modal input,
+.modal textarea {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-family: "Supreme-regular", sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    outline: none;
+    resize: none;
+}
+
+.modal input:focus,
+.modal textarea:focus {
+    border-color: var(--accent);
+}
+
 .modal-btns {
     display: flex;
     gap: 0.5rem;
@@ -358,4 +401,55 @@ button:hover {
         align-self: auto;
         margin-bottom: 0.25rem;
     }
+}
+
+@media (min-width: 1000px) {
+    .container {
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "header center";
+    }
+
+    .header {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2rem 1.25rem;
+        border-radius: 0 2rem 2rem 0;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        margin-bottom: 0;
+        gap: 2rem;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+    }
+
+    .navbar {
+        width: 100%;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    .navbar ul li a {
+        justify-content: flex-start;
+    }
+
+    .navbar ul li a span {
+        display: inline;
+    }
+
+    .profile {
+        max-width: 680px;
+    }
+
+    .center {
+        padding: 2rem;
+    }
+
 }
